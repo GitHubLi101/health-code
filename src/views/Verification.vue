@@ -89,7 +89,7 @@ export default {
           console.log("已通过");
           this.tackBtn(); //验证码倒数60秒
           let fd = new FormData(); //POST 请求需要 转化为Form
-          fd.append("PhoneNumber", this.form.phone);
+          fd.append("uphone", this.form.phone);
           fd.append("NeedCheck", 2);
           this.$axios({
             method: "POST",
@@ -122,7 +122,7 @@ export default {
         // 为表单绑定验证功能
         if (valid) {
           let fd = new FormData();
-          fd.append("PhoneNumber", this.form.phone);
+          fd.append("uphone", this.form.phone);
           fd.append("VCode", this.form.code);
           this.$axios({
             method: "POST",

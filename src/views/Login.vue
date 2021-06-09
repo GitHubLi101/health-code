@@ -16,9 +16,9 @@
             </div>
     <mt-field type="number"
               label="手机号"
-              v-model="phonenumber"
-              :state="phonenumberState"
-              @blur.native="checkPhonenumber"
+              v-model="uphone"
+              :state="uphoneState"
+              @blur.native="checkUphone"
               placeholder="请输入手机号">
     </mt-field>
     <mt-field type="password"
@@ -61,16 +61,16 @@ export default {
     },
 
     /** 验证手机号 */
-    checkPhonenumber(){
+    checkUphone(){
       // 获取文本框的值  
       // 通过正则表达式，验证文本框的内容是否合法
       let reg = /^1[3-9]\d{9}$/;
       // 分支业务：如果合法(state:succes)如果不合法(state:error)
-      if(reg.test(this.phonenumber)){
-        this.phonenumberState = 'success'
+      if(reg.test(this.uphone)){
+        this.uphoneState = 'success'
         return true;
       }else{
-        this.phonenumberState = 'error'
+        this.uphoneState = 'error'
         return false;
       }
     },
@@ -78,11 +78,11 @@ export default {
     /** 点击确认按钮 验证表单 */
     checkForm(){
       // 验证用户名
-      if(this.checkPhonenumber() && this.checkPwd()){
+      if(this.checkUphone() && this.checkPwd()){
         console.log('login...')
         // 发送请求，执行登录业务
         this.axios.post('/login', 
-          `phonenumber=${this.phonenumber}&password=${this.pwd}`)
+          `uphone=${this.uphone}&password=${this.pwd}`)
           .then(result=>{
           console.log(result)
           if(result.data.code==200){

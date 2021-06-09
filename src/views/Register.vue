@@ -37,8 +37,8 @@
     <mt-field
       type="number"
       label="+86"
-      v-model="phonenumber"
-      :state="phonenumberState"
+      v-model="uphone"
+      :state="uphoneState"
       placeholder="请填写手机号码"
     >
     </mt-field>
@@ -92,7 +92,7 @@ export default {
       repwd: "",
       repwdState: "",
       imageUrl: "",
-      phonenumber: "",
+      uphone: "",
       radio: '1'
     };
   },
@@ -216,16 +216,16 @@ export default {
       }
     },
     /** 验证手机号 */
-    checkPhonenumber() {
+    checkUphone() {
       // 获取文本框的值
       // 通过正则表达式，验证文本框的内容是否合法
       let reg = /^1[3-9]\d{9}$/;
       // 分支业务：如果合法(state:succes)如果不合法(state:error)
-      if (reg.test(this.phonenumber)) {
-        this.phonenumberState = "success";
+      if (reg.test(this.uphone)) {
+        this.uphoneState = "success";
         return true;
       } else {
-        this.phonenumberState = "error";
+        this.uphoneState = "error";
         return false;
       }
     },
@@ -233,11 +233,11 @@ export default {
     /** 点击确认按钮 验证表单 */
     checkForm() {
       // 验证用户名
-      if (this.checkUsername() && this.checkPwd() && this.checkRepwd() && this.checkPhonenumber()) {
+      if (this.checkUsername() && this.checkPwd() && this.checkRepwd() && this.checkUphone()) {
         console.log("regist...");
         // 发送http请求，执行注册业务
         this.axios
-          .post("/register", `username=${this.username}&password=${this.pwd}&phonenumber=${this.phonenumber}`)
+          .post("/register", `username=${this.username}&password=${this.pwd}&uphone=${this.uphone}`)
           .then((result) => {
             console.log(result);
             if (result.data.code == 200) {
