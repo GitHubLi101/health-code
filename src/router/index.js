@@ -17,6 +17,8 @@ import Login from '../views/Login.vue'
 import Me from '../views/Me.vue'
 import Article from '../views/Article.vue'
 import Verification from '../views/Verification.vue'
+import Success from '../views/Success.vue'
+
 
 Vue.use(VueRouter)
 const routes = [
@@ -98,6 +100,11 @@ const routes = [
   {
     path: '/verification',
     name: 'Verification',
+    component: Verification
+  },
+  {
+    path: '/success',
+    name: 'Success',
     component: Verification
   },
   {

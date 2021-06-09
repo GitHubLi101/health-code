@@ -92,6 +92,7 @@ export default {
       repwd: "",
       repwdState: "",
       imageUrl: "",
+      phonenumber: "",
       radio: '1'
     };
   },
@@ -214,15 +215,29 @@ export default {
         return false;
       }
     },
+    /** 验证手机号 */
+    checkPhonenumber() {
+      // 获取文本框的值
+      // 通过正则表达式，验证文本框的内容是否合法
+      let reg = /^1[3-9]\d{9}$/;
+      // 分支业务：如果合法(state:succes)如果不合法(state:error)
+      if (reg.test(this.phonenumber)) {
+        this.phonenumberState = "success";
+        return true;
+      } else {
+        this.phonenumberState = "error";
+        return false;
+      }
+    },
 
     /** 点击确认按钮 验证表单 */
     checkForm() {
       // 验证用户名
-      if (this.checkUsername() && this.checkPwd() && this.checkRepwd()) {
+      if (this.checkUsername() && this.checkPwd() && this.checkRepwd() && this.checkPhonenumber()) {
         console.log("regist...");
         // 发送http请求，执行注册业务
         this.axios
-          .post("/register", `username=${this.username}&password=${this.pwd}`)
+          .post("/register", `username=${this.username}&password=${this.pwd}&phonenumber=${this.phonenumber}`)
           .then((result) => {
             console.log(result);
             if (result.data.code == 200) {
